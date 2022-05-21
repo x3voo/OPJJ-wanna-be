@@ -1,6 +1,6 @@
 const https = require('https');
 
-var api_key = "RGAPI-bcc1cc5d-a2ec-4350-9140-69826c65d090";
+var api_key = "RGAPI-8be3c08b-93fb-4252-abab-d59e7f23e97e";
 
 
 /*

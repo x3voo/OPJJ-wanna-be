@@ -10,23 +10,962 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		
+		<script src="scripts/main.js"></script>
 		
 		<link rel="stylesheet" href="assets/styles/main.css"/>
+		
+		<!-- main -->
+		<style>
+			body, h1, h2, h3, h4, p, ol, ul, dl, dd, button {
+				margin: 0;
+				padding: 0;
+			}
+			html, body, button, select, input, textarea, label, a, table {
+				font-family: "Roboto",Sans-serif;
+			}
+			
+			#main {
+				/* TODO support other browsers */
+				display: flex;
+				flex-direction: column;
+				height: 100%;
+			}
+			
+			footer, header {
+				display: block;
+			}
+			
+			html {
+				font-family: sans-serif;
+				/* TODO support other browsers */
+				
+				-webkit-text-size-adjust: 100%;
+				background-color: #ebeef1;
+			}
+			
+			img {
+				border: 0;
+				vertical-align: middle;
+				max-width: 100%;
+			}
+			
+			ol, ul, li {
+				list-style: none;
+			}
+			
+			dl, dt, dd, ol, ul, li {
+				list-style: none;
+				margin: 0px;
+				padding: 0px;
+			}
+			
+			ul, li {
+				list-style: none;
+			}
+			
+			button {
+				margin: 0;
+				border: 0;
+				padding: 0;
+				background: transparent;
+				cursor: pointer;
+			}
+		</style>
+		
+		<!-- header -->
+		<style>
+			header {
+				min-width: 1080px;
+			}
+			
+			.main-banner {
+				/* TODO support other browsers */
+				position: relative;
+				height: 40px;
+				padding-left: 98px;
+				background-color: #28344E;
+				display: flex;
+				-webkit-box-align: center;
+				align-items: center;
+			}
+			
+			.navigation-banner {
+				display: flex;
+				-webkit-box-pack: center;
+				justify-content: center;
+				height: 48px;
+				background-color: #5383E8;
+			}
+			
+		</style>
+		
+		<!-- content-header -->
+		<style>
+			.content-header-top {
+				background-color: #FFF;
+			}
+			
+			.content-header-top .wrapper {
+				/* TODO support other browsers */
+				display: flex;
+				width: 1080px;
+				margin: 0 auto;
+				-webkit-box-pack: justify;
+				justify-content: space-between;
+				
+			}
+			
+			.content-header-top .wrapper > div {
+				/* TODO support other browsers */
+				display: flex;
+				-webkit-box-align: center;
+				align-items: center;
+			}
+		
+			.content-header-top .profile-icon {
+				position: relative;
+				width: 100px;
+				height: 100px;
+			}
+			
+			.content-header-top .profile-icon img {
+				border-radius: 20px;
+			}
+			
+			.content-header-top .profile-icon div {
+				height: 20px;
+				margin-top: -10px;
+				text-align: center;
+			}
+			
+			.content-header-top .profile-icon div span {
+				display: inline-block;
+				line-height: 20px;
+				padding: 0 8px;
+				font-size: 12px;
+				border-radius: 10px;
+				color: #fff;
+				background-color: #202d37;
+			}
+			
+			.content-header-top .info {
+				margin-left: 24px;
+			}
+			
+			.content-header-top .info > .name {
+				/* TODO support other browsers */
+				display: flex;
+				-webkit-box-align: center;
+				align-items: center;
+				height: 32px;
+				margin-top: 8px;
+				font-size: 24px;
+				font-weight: bold;
+				color: #202D37;
+			}
+			
+			.content-header-top .info > .buttons {
+				/* TODO support other browsers */
+				display: flex;
+				margin-top: 12px;
+			}
+			
+			.content-header-top .info > .buttons button {
+				padding: 11px 14px 10px;
+				border-radius: 4px;
+				font-size: 14px;
+				margin-right: 8px;
+			}
+			
+			.content-header-bottom {
+				padding: 4px 0;
+				border-top: 1px solid;
+				border-color: #ebeef1;
+				background-color: #FFF;
+			}
+		</style>
+		
+		<!-- content-conteiner -->
+			<!-- STATS -->
+		<style>
+			#content-container {
+				width: 1080px;
+				margin: 0 auto;
+				display: inline-table; /* wtf */
+			}
+			
+			#content-container > div:nth-of-type(1) {
+				display: inline-block;
+				width: 332px;
+				font-size: 12px;
+				vertical-align: top;
+				min-height: 870px;
+			}
+			
+			/* RANKED SOLO / FLEX */
+			
+			.ranked-solo-flex {
+				margin-top: 8px;
+				border-radius: 4px;
+				background-color: #FFF;
+			}
+			
+			.ranked-solo-flex .header {
+			
+				/* Support */
+				display: -webkit-box;
+				display: -webkit-flex;
+				display: -ms-flexbox;
+				-webkit-justify-content: space-between;
+				/* Support */
+				
+				display: flex;
+				-webkit-box-pack: justify;
+				justify-content: space-between;
+				line-height: 35px;
+				padding: 0 12px;
+				font-size: 14px;
+				color: #202D37;
+			}
+			
+			.ranked-solo-flex .header .unranked {
+				font-size: 14px;
+				font-weight: bold;
+				color: #C3CBD1;
+			}
+			
+			.ranked-solo-flex > .content {
+				/* Support */
+				display: -webkit-box;
+				display: -webkit-flex;
+				display: -ms-flexbox;
+				-webkit-align-items: center;
+				/* Support */
+				
+				display: flex;
+				-webkit-box-align: center;
+				align-items: center;
+				padding: 12px;
+				border-top: 1px solid;
+				border-color: #ebeef1;
+			}
+			
+			.ranked-solo-flex > .content img {
+				background-color: #F7F7F9;
+				border-radius: 50%;
+			}
+			
+			.ranked-solo-flex > .content .info {
+				/* Support */
+				-webkit-flex: 1;
+				-ms-flex: 1;
+				/* Support */
+				
+				flex: 1;
+				position: relative;
+				margin-left: 16px;
+			}
+			
+			.ranked-solo-flex > .content .info .tier {
+				line-height: 26px;
+				font-size: 20px;
+				font-weight: bold;
+				text-transform: capitalize;
+				color: #202D37;
+			}
+			
+			.ranked-solo-flex > .content .info .tier-flex {
+				line-height: 20px;
+				font-size: 14px;
+				font-weight: bold;
+				text-transform: capitalize;
+				color: #202D37;
+			}
+			
+			.ranked-solo-flex > .content .info .lp {
+				line-height: 16px;
+				margin-top: 2px;
+				font-size: 12px;
+				color: #758592;
+			}
+			
+			.ranked-solo-flex > .content .win-lose {
+				line-height: 18px;
+				margin-top: 2px;
+				font-size: 12px;
+				text-align: right;
+				color: #9AA4AF;
+			}
+			
+			/* STATS */
+			
+			.stats-preview {
+				margin-top: 8px;
+				background-color: #FFF;
+				border-radius: 4px;
+				overflow: hidden;
+			}
+			
+			.stats-preview .header {
+			
+				/* Support */
+				display: -webkit-box;
+				display: -webkit-flex;
+				display: -ms-flexbox;
+				-webkit-justify-content: space-between;
+				/* Support */
+				
+				display: flex;
+				-webkit-box-pack: justify;
+				justify-content: space-between;
+				line-height: 35px;
+				padding: 0 12px;
+				font-size: 14px;
+				color: #202D37;
+				
+				border-bottom: 1px solid; /* temporary */
+				border-color: #ebeef1;
+			}
+			
+			.stats-preview > div .champion-box {
+				display: table;
+				width: 100%;
+				height: 48px;
+				border-bottom: 1px solid;
+				border-color: #ebeef1;
+				color: #9AA4AF;
+				text-align: center;
+			}
+			
+			/* face */
+			
+			.stats-preview > div .champion-box .face {
+				display: table-cell;
+				width: 44px;
+				text-align: right;
+				vertical-align: middle;
+			}
+			
+			.stats-preview > div .champion-box .face img {
+				width: 32px;
+				height: 32px;
+				border-radius: 50%;
+			}
+			
+			/* info */
+			
+			.stats-preview > div .champion-box .info {
+				display: table-cell;
+				width: 85px;
+				text-align: left;
+				vertical-align: middle;
+				padding-left: 8px;
+			}
+			
+			.stats-preview > div .champion-box .info .name {
+				width: 106px;
+				color: #202D37;
+				font-weight: bold;
+				font-size: 12px;
+				text-overflow: ellipsis;
+				overflow: hidden;
+				white-space: nowrap;
+			}
+			
+			.stats-preview > div .champion-box .info .cs {
+				margin-top: 2px;
+				font-size: 11px;
+				white-space: nowrap;
+			}
+			
+			/* kda */
+			
+			.stats-preview > div .champion-box .kda {
+				display: table-cell;
+				vertical-align: middle;
+				text-align: center;
+			}
+			
+			.kda-value {
+				font-size: 12px;
+				font-weight: bold;
+				white-space: nowrap;
+				color: #758592;
+			}
+			
+			.stats-preview > div .champion-box .kda .detail {
+				margin-top: 2px;
+				font-size: 11px;
+				white-space: nowrap;
+			}
+			
+			/* played */
+			
+			.stats-preview > div .champion-box .played {
+				display: table-cell;
+				width: 70px;
+				padding-right: 0px;
+				vertical-align: middle;
+				text-align: center;
+			}
+			
+			.played-value {
+				line-height: 15px;
+				font-size: 12px;
+				color: rgb(198, 68, 62);
+			}
+			
+			.stats-preview > div .champion-box .played .count {
+				margin-top: 2px;
+				font-size: 11px;
+				white-space: nowrap;
+			}
+			
+			.stats-preview > div .more {
+				/* Support */
+				display: -webkit-box;
+				display: -webkit-flex;
+				display: -ms-flexbox;
+				-ms-flex-pack: center;
+				-webkit-justify-content: center;
+				-webkit-align-items: center;
+				-ms-flex-align: center;
+				-webkit-text-decoration: none;
+				/* Support */
+
+				display: flex;
+				-webkit-box-pack: center;
+				justify-content: center;
+				-webkit-box-align: center;
+				align-items: center;
+				text-decoration: none;
+				padding: 11px 0 10px;
+				line-height: 15px;
+				font-size: 12px;
+				text-align: center;
+				background-color: #F7F7F9;
+				color: #758592;
+			}
+			
+		</style>
+		
+			<!-- matches -->
+		<style>
+			.content-container-right {
+				display: inline-block;
+				width: 740px;
+				margin-top: 8px;
+				margin-left: 8px;
+				font-size: 12px;
+				vertical-align: top;
+			}
+			
+			.match-list-ul {
+				margin-top: 8px;
+			}
+			
+			.match-list-li {
+				position: relative;
+				margin-bottom: 8px;
+			}
+			
+			/* match-summary-block */
+			.match-summary-block {
+				/* Support */
+				display: -webkit-box;
+				display: -webkit-flex;
+				display: -ms-flexbox;
+				-webkit-align-items: center;
+				-ms-flex-align: center;
+				/* Support */
+				
+				display: flex;
+				-webkit-box-align: center;
+				align-items: center;
+				height: 96px;
+				border-radius: 4px;
+				border-left: 6px solid;
+				border-color: #5383E8;
+				background-color: #ECF2FF;
+			}
+			
+			.match-summary-block .game {
+				width: 108px;
+				margin-left: 12px;
+				color: #758592;
+				line-height: 16px;
+			}
+			
+				.match-summary-block .game .type {
+					font-weight: bold;
+					color: #4171D6;
+				}
+				
+				.match-summary-block .game .bar {
+					width: 48px;
+					height: 1px;
+					margin: 8px 0 4px;
+					background-color: #D5E3FF;
+				}
+				
+				.match-summary-block .game .result {
+					font-weight: bold;
+				}
+				
+			
+			.match-summary-block .info {
+				margin-left: 8px;
+			}
+				.match-summary-block .info > div:nth-of-type(1) {
+					/* Support */
+					display: -webkit-box;
+					display: -webkit-flex;
+					display: -ms-flexbox;
+					/* Support */
+					
+					display: flex;
+				}
+				
+				.match-summary-block .info > div:nth-of-type(1) .champion {
+					/* Support */
+					display: -webkit-box;
+					display: -webkit-flex;
+					display: -ms-flexbox;
+					-webkit-align-items: center;
+					-ms-flex-align: center;
+					/* Support */
+					
+					display: flex;
+					-webkit-box-align: center;
+					align-items: center;
+				}
+					
+					.match-summary-block .info > div:nth-of-type(1) .champion .icon img {
+						border-radius: 50%;
+					}
+					
+				.match-summary-block .info > div:nth-of-type(1) .champion .spells {
+					margin-left: 4px;
+				}
+				
+					.match-summary-block .info > div:nth-of-type(1) .champion .spells .spell:nth-of-type(1) {
+						margin-bottom: 2px;
+					}
+					
+					.match-summary-block .info > div:nth-of-type(1) .champion .spells .spell img {
+						border-radius: 4px;
+					}
+					
+				.match-summary-block .info > div:nth-of-type(1) .champion .runes {
+					margin-left: 2px;
+				}
+				
+					.match-summary-block .info > div:nth-of-type(1) .champion .runes .rune:nth-of-type(1) {
+						margin-bottom: 2px;
+						background-color: #000;
+						border-radius: 50%;
+					}
+					
+					.match-summary-block .info > div:nth-of-type(1) .champion .runes .rune img {
+						border-radius: 50%;
+					}
+					
+					
+				
+				.match-summary-block .info > div:nth-of-type(1) .kda {
+					/* Support */
+					display: -webkit-box;
+					display: -webkit-flex;
+					display: -ms-flexbox;		
+					-webkit-flex-direction: column;
+					-ms-flex-direction: column;			
+					-ms-flex-pack: center;
+					-webkit-justify-content: center;
+					/* Support */
+					
+					display: flex;
+					flex-direction: column;
+					-webkit-box-pack: center;					
+					justify-content: center;
+					position: relative;
+					width: 107px;
+					padding-right: 12px;
+					margin-right: 8px;
+					margin-left: 12px;
+				}
+				
+					.match-summary-block .info > div:nth-of-type(1) .kda .k-d-a {
+						line-height: 22px;
+						font-size: 15px;
+						color: #9AA4AF;
+					}
+					
+					.match-summary-block .info > div:nth-of-type(1) .kda .k-d-a span {
+						font-weight: bold;
+						color: #202D37;
+					}
+					
+					.match-summary-block .info > div:nth-of-type(1) .kda .k-d-a .d {
+						color: #D31A45;
+					}
+					
+					.match-summary-block .info > div:nth-of-type(1) .kda .ratio {
+						line-height: 16px;
+						color: #758592;
+					}
+					
+					.match-summary-block .info > div:nth-of-type(1) .kda::after {
+						content: "";
+						position: absolute;
+						top: 0px;
+						right: 0px;
+						width: 1px;
+						height: 100%;
+						background-color: #D5E3FF;
+					}
+				
+				.match-summary-block .info > div:nth-of-type(1) .stats {
+					/* Support */
+					display: -webkit-box;
+					display: -webkit-flex;
+					display: -ms-flexbox;
+					-webkit-flex-direction: column;
+					-ms-flex-direction: column;
+					-webkit-align-items: flex-start;
+					-webkit-box-align: flex-start;
+					-ms-flex-align: flex-start;
+					/* Support */
+	
+					display: flex;
+					flex-direction: column;
+					align-items: flex-start;
+					width: 140px;
+					line-height: 15px;
+					color: #758592;
+				}
+				
+					.match-summary-block .info > div:nth-of-type(1) .stats .p-kill {
+						color: #D31A45;
+					}
+					
+					.match-summary-block .info > div:nth-of-type(1) .stats .average-tier {
+						font-weight: bold;
+						text-transform: capitalize;
+					}
+					
+					
+				
+				.match-summary-block .info > div:nth-of-type(2) .items {
+					/* Support */
+					display: -webkit-box;
+					display: -webkit-flex;
+					display: -ms-flexbox;
+					/* Support */
+					
+					display: flex;
+				}
+				
+					.match-summary-block .info > div:nth-of-type(2) .items ul {
+						/* Support */
+						display: -webkit-box;
+						display: -webkit-flex;
+						display: -ms-flexbox;
+						/* Support */
+						
+						display: flex;
+					}
+					
+					.match-summary-block .info > div:nth-of-type(2) .items ul li:nth-of-type(1) {
+						margin-left: 0;
+					}
+					
+					.match-summary-block .info > div:nth-of-type(2) .items ul li {
+						width: 22px;
+						height: 22px;
+						margin-left: 2px;
+						background-color: #B3CDFF;
+						border-radius: 4px;
+					}
+					
+					.match-summary-block .info > div:nth-of-type(2) .items ul li img {
+						border-radius: 4px;
+					}
+					
+					.match-summary-block .info > div:nth-of-type(2) .items .ward {
+						width: 22px;
+						height: 22px;
+						margin-left: 2px;
+						margin-right: 4px;
+						background-color: #B3CDFF;
+						border-radius: 50%;
+					}
+					
+					.match-summary-block .info > div:nth-of-type(2) .items .ward img {
+						border-radius: 50%;
+					}
+				
+				
+				
+				.match-summary-block .info > div:nth-of-type(2) .multi-kill {
+					height: 18px;
+					line-height: 18px;
+					padding: 0 8px;
+					margin-left: 4px;
+					border-radius: 9px;
+					background-color: #E84057;
+					color: #FFF;
+				}
+				
+			
+			.match-summary-block .participants {
+				/* Support */
+				display: -webkit-box;
+				display: -webkit-flex;
+				display: -ms-flexbox;
+				/* Support */
+				
+				display: flex;
+				margin-left: 12px;
+			}
+			
+				.match-summary-block .participants ul:nth-of-type(1) {
+					margin-right: 8px;
+				}
+				
+				.participant-li, .participant-li-user {
+					/* Support */
+					display: -webkit-box;
+					display: -webkit-flex;
+					display: -ms-flexbox;
+					-webkit-align-items: center;
+					-ms-flex-align: center;
+					/* Support */
+
+					display: flex;
+					-webkit-box-align: center;
+					align-items: center;
+					width: 88px;
+					height: 18px;
+					text-align: left;
+					white-space: nowrap;
+				}
+				
+				.participant-li .icon {
+					display: inline-block;
+					vertical-align: middle;
+					margin-right: 4px;
+				}
+				
+					.participant-li .icon img {
+						display: block;
+						width: 16px;
+						height: 16px;
+						border-radius: 4px;
+					}
+				
+				.participant-li .name {
+					display: inline-block;
+					max-width: 60px;
+					vertical-align: middle;
+					font-size: 12px;
+					color: #758592;
+				}
+				
+				.participant-li-user .icon {
+					display: inline-block;
+					vertical-align: middle;
+					margin-right: 4px;
+				}
+				
+					.participant-li-user .icon img {
+						display: block;
+						width: 16px;
+						height: 16px;
+						border-radius: 50%;
+					}
+				
+				.participant-li-user .name {
+					display: inline-block;
+					max-width: 60px;
+					vertical-align: middle;
+					font-size: 12px;
+					color: #202D37;
+				}		
+
+			
+			.match-summary-block .action {
+				position: relative;
+				width: 40px;
+				height: 96px;
+				border-top-right-radius: 4px;
+				border-bottom-right-radius: 4px;
+				overflow: hidden;
+				background-color: #D5E3FF;
+			}
+			
+				.match-summary-block .action .detail {
+					width: 40px;
+					height: 96px;
+				}
+			
+			.lose-con {
+				border-color: #E84057;
+				background-color: #FFF1F3;
+			}
+			
+			.lose-con .game .type {
+				color: #D31A45;
+			}
+			
+			.lose-con .action {
+				background-color: #FFD8D9;
+			}
+			
+			.lose-con .info > div:nth-of-type(1) .kda::after {
+				background-color: #FFD8D9;
+			}
+			
+			    
+		</style>
 	</head>
-	<body>
-		Yo
-		<input type="text" id="username"></input>
-		<button onclick="showUser()">Show user</button>
-		<button onclick="updateUser()">Update user</button>
-		<button onclick="test()">Test</button>
-		<br><br>
-		<div id="response">
-		
-		</div>
-		<div id="matches">
-		
-		</div>
-		
-		<script src="scripts/main.js"></script>
+	<body onload="run()">
+		<div id="main">
+			<header>
+				<div class="main-banner">
+					Yo
+				</div>
+				<div class="navigation-banner">
+					<input type="text" id="username"></input>
+					<button id="get">Show user</button>
+					
+					<button onclick="test()">Test</button>
+				</div>
+			</header>
+			<div id="content-header">
+				<div class="content-header-top">
+	<br/>
+					<div class="wrapper">
+						<div>
+							<div class="profile-icon">
+								<img id="profileIconId" src="" alt="Profile image"/>
+								<div>
+									<span id="summonerLevel" class="level">0</span>
+								</div>
+							</div>
+							<div class="info">
+								<div class="name">
+									<span id="name" class="summoner-name">Summoner</span>
+								</div>
+								<div class="buttons">
+									<button id="update">Update</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<br/><br/>
+			<div id="content-container">
+				<div>
+					<div class="ranked-solo-flex">
+						<div class="header">
+							Ranked Solo
+							<span id="isRankedSoloSpan" class="unranked">Unranked</span>
+						</div>
+						<div id="isRankedSoloInfo" style="display: none;" class="content">
+							<div style="position: relative;">
+								<img id="tierIcon-solo" src="" width="72" alt="RANK?"/>
+							</div>
+							<div class="info">
+								<div id="tier-solo" class="tier">
+									Unranked
+								</div>
+								<div id="leaguePoints-solo" class="lp">
+									0 LP
+								</div>
+							</div>
+							<div id="win-lose-solo" class="win-lose">
+								<div>
+									0W 0L
+								</div>
+								Win Rate 0%
+							</div>
+						</div>
+					</div>
+					<div class="ranked-solo-flex">
+						<div class="header">
+							Ranked Flex
+							<span id="isRankedFlexSpan" class="unranked">Unranked</span>
+						</div>
+						<div id="isRankedFlexInfo" style="display: none;" class="content">
+							<div style="position: relative;">
+								<img id="tierIcon-flex" src="" width="40" alt="RANK?"/>
+							</div>
+							<div class="info">
+								<div id="tier-flex" class="tier-flex">
+									Unranked
+								</div>
+								<div id="leaguePoints-flex" class="lp">
+									0 LP
+								</div>
+							</div>
+							<div id="win-lose-flex" class="win-lose">
+								<div>
+									0W 0L
+								</div>
+								Win Rate 0%
+							</div>
+						</div>
+					</div>
+					<div class="stats-preview">
+						<div class="header">
+							Stats
+						</div>
+						<div id="championStatsPreview">
+							
+						</div>
+					</div>
+					<div style="display: none;">
+						Ranked Winrate for past 7 days.
+					</div>
+					<div style="display: none;">
+						Recently Played With (Recent 14 Games)
+					</div>
+				</div>
+				<div class="content-container-right">
+					<!-- TODO -->
+					
+					<ul id="matchList" class="match-list-ul">
+					<!--
+						<li class="match-list-li">
+							<div>
+							</div>
+							<div>
+								<div>
+									<table>
+									</table>
+									<div>
+									</div>
+									<table>
+									</table>
+								</div>
+							</div>
+						</li>
+					-->
+					</ul>
+				</div>
+			</div>
+			
+			<footer id="footer">
+				<div id="response">
+						
+				</div>
+				<div id="matches">
+					
+				</div>
+				<br/>
+				<p>OPJJ Wanna Be</p>
+			</footer>
+		</main>
 	</body>
 </html>

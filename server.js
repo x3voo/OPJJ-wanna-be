@@ -42,7 +42,7 @@ http.createServer(function (req, res) {
 		'.doc': 'application/msword'
 	};
 	
-	console.log(parsedUrl);
+	//console.log(parsedUrl);
 	
 
 	fs.exists(pathname, function (exist) {

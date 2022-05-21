@@ -27,7 +27,7 @@ class Database {
 	}
 }
 
-var api_key = "RGAPI-dcece7a5-5e50-42a2-ba6f-cd2b6f8276ca";
+
 
 module.exports = {
 	getUserData: function(name, oriRes){
@@ -164,6 +164,7 @@ async function getMatches(puuid, oriRes){
 		console.log(allData.length);
 		if(allData.length == 0){
 			oriRes.write("NO_MATCHES");
+			console.log("no games lol");
 		} else {
 			oriRes.write(JSON.stringify(allData));
 		}
