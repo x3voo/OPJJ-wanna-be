@@ -70,6 +70,33 @@
 				background: transparent;
 				cursor: pointer;
 			}
+			
+			/* Test */
+			#username {
+				border: solid 4px #5383E8;
+				border-radius: 8px 0px 0px 8px;
+				border-right: none;
+				padding-left: 16px;
+				background-color: #e8f0fe;
+			}
+			
+			#username:focus {
+				border: solid 4px #7d9fe6;
+				border-right: none;
+				background-color: #e8f0fe;
+				resize: none;
+				outline: none;
+			}
+			
+			#get {
+				background-color: #fff;
+				border: solid 4px #5383E8;
+				border-radius: 0px 8px 8px 0px;
+				color: #5383E8;
+				border-left: none;
+				padding-right: 12px;
+				padding-left: 10px;
+			}
 		</style>
 		
 		<!-- header -->
@@ -87,6 +114,8 @@
 				display: flex;
 				-webkit-box-align: center;
 				align-items: center;
+				
+				    color: wheat;
 			}
 			
 			.navigation-banner {
@@ -176,6 +205,14 @@
 				font-size: 14px;
 				margin-right: 8px;
 			}
+			
+			.button-update {
+				position: relative;
+				border: #5383E8;
+				background: #5383E8;
+				color: #FFF;
+			}
+			
 			
 			.content-header-bottom {
 				padding: 4px 0;
@@ -516,6 +553,20 @@
 			.match-summary-block .info {
 				margin-left: 8px;
 			}
+				.match-summary-block .info > div:nth-of-type(2) {
+					/* Support */
+					display: -webkit-box;
+					display: -webkit-flex;
+					display: -ms-flexbox;
+					-webkit-align-items: center;
+					-ms-flex-align: center;
+					/* Support */
+					
+					display: flex;
+					-webkit-box-align: center;
+					align-items: center;
+				}
+				
 				.match-summary-block .info > div:nth-of-type(1) {
 					/* Support */
 					display: -webkit-box;
@@ -832,13 +883,11 @@
 		<div id="main">
 			<header>
 				<div class="main-banner">
-					Yo
+					LoL Finder
 				</div>
 				<div class="navigation-banner">
 					<input type="text" id="username"></input>
 					<button id="get">Show user</button>
-					
-					<button onclick="test()">Test</button>
 				</div>
 			</header>
 			<div id="content-header">
@@ -847,7 +896,7 @@
 					<div class="wrapper">
 						<div>
 							<div class="profile-icon">
-								<img id="profileIconId" src="" alt="Profile image"/>
+								<img id="profileIconId" src="http://ddragon.leagueoflegends.com/cdn/12.9.1/img/profileicon/29.png" alt="Profile image"/>
 								<div>
 									<span id="summonerLevel" class="level">0</span>
 								</div>
@@ -857,7 +906,7 @@
 									<span id="name" class="summoner-name">Summoner</span>
 								</div>
 								<div class="buttons">
-									<button id="update">Update</button>
+									<button id="update" class="button-update">Update</button>
 								</div>
 							</div>
 						</div>

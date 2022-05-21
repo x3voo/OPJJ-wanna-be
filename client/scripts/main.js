@@ -121,7 +121,7 @@ function updateProfile(summonerData, summonerMatchData) {
 				matchList.appendChild(matchListLi);
 				
 				temp = match;
-				matches.innerHTML += "<br>["+match.matchId+"]" + match.data.info.gameMode;
+				//matches.innerHTML += "<br>["+match.matchId+"]" + match.data.info.gameMode;
 				
 			});
 		}
@@ -329,6 +329,22 @@ function createMatchSummaryBlock(m, user){
 	
 	
 	infoDiv2.appendChild(items);
+	
+	var multiKill = document.createElement("div");
+	multiKill.classList.add("multi-kill");
+	if(user['pentaKills'] > 0){
+		multiKill.innerHTML = "Penta Kill";
+		infoDiv2.appendChild(multiKill);
+	} else if(user['quadraKills'] > 0) {
+		multiKill.innerHTML = "Quadra Kill";
+		infoDiv2.appendChild(multiKill);
+	} else if(user['tripleKills'] > 0) {
+		multiKill.innerHTML = "Triple Kill";
+		infoDiv2.appendChild(multiKill);
+	} else if(user['doubleKills'] > 0) {
+		multiKill.innerHTML = "Double Kill";
+		infoDiv2.appendChild(multiKill);
+	}
 	
 	info.appendChild(infoDiv1);
 	info.appendChild(infoDiv2);
