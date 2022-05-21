@@ -196,7 +196,7 @@ async function matchListPipe(puuid, oriRes){
 		if(!obj.hasOwnProperty('status')){
 			for (const element of obj) {
 				console.log("[Pipe1]["+element+"]Adding match id to DB");
-				await db.run('INSERT or REPLACE INTO matches(puuid, matchId) VALUES(?, ?)', [puuid, element]);
+				await db.run('INSERT INTO matches(puuid, matchId) SELECT ?, ? WHERE NOT EXISTS (SELECT 1 FROM matches WHERE puuid=? AND matchId=?)', [puuid, element,puuid,element]);
 				console.log("[Pipe1]["+element+"]Done");
 				console.log("[Pipe1]["+element+"] starting download Pipe");
 				await matchDownloadPipe(element);

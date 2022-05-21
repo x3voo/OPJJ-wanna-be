@@ -239,7 +239,7 @@ function createMatchSummaryBlock(m, user){
 	
 	var kdaNum = document.createElement("div");
 	kdaNum.classList.add("k-d-a");
-	kdaNum.innerHTML = '<span>'+user['kills']+'</span>/<span class="d">'+user['deaths']+'</span>/<span>'+user['assists']+'</span>';
+	kdaNum.innerHTML = '<span>'+user['kills']+'</span> / <span class="d">'+user['deaths']+'</span> / <span>'+user['assists']+'</span>';
 	
 	var ratio = document.createElement("div");
 	ratio.classList.add("ratio");

@@ -2,6 +2,22 @@ const https = require('https');
 
 var api_key = "RGAPI-8be3c08b-93fb-4252-abab-d59e7f23e97e";
 
+var gamesPerUpdate = 10;
+
+/*
+VIEW
+0 requests
+
+VIEW (if doesnt exists in db)
+2 requests (profile, leagues)
+
+UPDATE
+2 requests (profile, leagues)
+1 request (list of 10 matchIds)
+10 requests (match-data)
+= 13
+
+*/
 
 /*
 RATE LIMITS
@@ -117,7 +133,7 @@ async function RiotAPI_getLeagueEntriesInAllQueues(id) {
 async function RiotAPI_getListOfMatchIds(puuid) {
 	
 	return new Promise ((resolve, reject) => {
-		var url = encodeURI('/lol/match/v5/matches/by-puuid/'+puuid+'/ids?start=0&count=2');
+		var url = encodeURI('/lol/match/v5/matches/by-puuid/'+puuid+'/ids?start=0&count='+gamesPerUpdate);
 		requests++;
 		const options = {
 			hostname: 'europe.api.riotgames.com',
