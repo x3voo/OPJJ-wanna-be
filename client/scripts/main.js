@@ -15,13 +15,110 @@ function run(){
 	user = document.getElementById("username");
 	response = document.getElementById("response");
 	matches = document.getElementById("matches");
+	
+	
+	
+	favorite();
+	
+	
 	document.getElementById("get").addEventListener("click", () => getUserData(user.value));
 	document.getElementById("update").addEventListener("click", () => updateUserDataCheck());
+	
+	document.getElementById("addToFavButton").addEventListener("click", () => addToFavorite());
 }
+
+
 
 
 function favorite(){
 	// TODO
+	var json = [];
+	var temp = getCookie("favorites");
+	if(temp != ""){
+		json = JSON.parse(temp);
+	}
+	
+	
+	var favorite = document.querySelector('#favorites');
+	favorite.innerHTML = "";
+	
+	var p;
+	
+	p = document.createElement("p");
+	p.innerHTML = "<b>Favorites</b>";
+	p.style.cursor = "default";
+	favorite.appendChild(p);
+	
+	var none = false;
+	
+	json.forEach(summoner => {
+		p = document.createElement("p");
+		p.innerHTML = summoner;
+		p.value = summoner;
+		p.onclick = function(){getUserData(this.value);};
+		
+		favorite.appendChild(p);
+		
+		none = true;
+	});
+	
+	if(none == false){
+		p = document.createElement("p");
+		p.innerHTML = "Add your <img src='assets/images/icon-bookmark.svg' alt='off'/> favorite summoner for easy updates on the latest stats.";
+		p.style.color = "rgb(154, 164, 175)";
+		p.style.fontSize = "12px";
+		
+		favorite.appendChild(p);
+	}
+	
+	user.addEventListener('focus', function(){
+		this.parentNode.appendChild(favorite);
+	});
+}
+
+function addToFavorite(){
+	
+	console.log("Adding summoner to fav");
+	if(currentUserName != null){
+		var arrString = getCookie("favorites");
+		var arr;
+		if(arrString == ""){
+			arr = [];
+		} else {
+			arr = JSON.parse(arrString);
+		}
+		arr.push(currentUserName);
+		arrString = JSON.stringify(arr);
+		setCookie("favorites", arrString, "9999");
+		favorite();
+		console.log("Summoner added to fav");
+	} else {
+		console.log("No summoner info");
+	}
+}
+
+function getCookie(cname) {
+  let name = cname + "=";
+  let decodedCookie = decodeURIComponent(document.cookie);
+  let ca = decodedCookie.split(';');
+  for(let i = 0; i <ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+
+function setCookie(cname, cvalue, exdays) {
+  const d = new Date();
+  d.setTime(d.getTime() + (exdays*24*60*60*1000));
+  var expires = "expires="+ d.toUTCString();
+  console.log(cname + "=" + cvalue + ";" + expires + ";path=/");
+  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 }
 
 var tempData;
@@ -35,9 +132,28 @@ function updateProfile(summonerData, summonerMatchData) {
 	tempMatches = summonerMatchData;
 	
 	
+	//Clear
+	document.getElementById("profileIconId").src = "http://ddragon.leagueoflegends.com/cdn/12.9.1/img/profileicon/29.png";
+	document.getElementById("summonerLevel").innerHTML = "0";
+	
+	document.getElementById("isRankedSoloSpan").style.display = "flex";
+	document.getElementById("isRankedSoloInfo").style.display = "none";
+	
+	document.getElementById("isRankedFlexSpan").style.display = "flex";
+	document.getElementById("isRankedFlexInfo").style.display = "none";
+	
+	var championStatsPreview = document.getElementById("championStatsPreview");
+		
+	championStatsPreview.innerHTML = ""; //Clear
+	
+	var matchList = document.getElementById("matchList");
+		
+	matchList.innerHTML = ""; //Clear
+	
+	
 	
 	if(summonerData == "USER_DEOS_NOT_EXISTS") {
-		response.innerHTML = "<br> Summoner <b>" + user.value + "</b> doesn't exists.";
+		document.getElementById("name").innerHTML = "<br> Summoner <b>" + user.value + "</b> doesn't exists.";
 	} else {
 		var league = JSON.parse(summonerData.leagueEntries);
 		/*
@@ -77,18 +193,17 @@ function updateProfile(summonerData, summonerMatchData) {
 			}
 		});
 		matches.innerHTML = "";
+		
+		
 	
 		if(summonerMatchData == "NO_MATCHES"){
-			matches.innerHTML = "<br>No matches found. Try updating";
+			matchList.innerHTML = "<br>No matches found. Try updating";
 		} else {
 			championPool = generateSummonerStatistics(tempMatches,currentUserPuuid);
 			
 			championPool.sort((a, b) => parseFloat(b.gamesPlayed) - parseFloat(a.gamesPlayed));
 			//tu teraz
 			
-			var championStatsPreview = document.getElementById("championStatsPreview");
-			
-			championStatsPreview.innerHTML = ""; //Clear
 			
 			championPool.forEach(c => {
 				championStatsPreview.appendChild(createChampionBox(c));
@@ -101,9 +216,7 @@ function updateProfile(summonerData, summonerMatchData) {
 			//more.href = ""; //TODO
 			championStatsPreview.appendChild(more);
 			
-			var matchList = document.getElementById("matchList");
 			
-			matchList.innerHTML = ""; //Clear
 			
 			summonerMatchData.forEach(match => {
 				var userStats;
@@ -246,7 +359,7 @@ function createMatchSummaryBlock(m, user){
 	if(user['deaths'] == 0){
 		ratio.innerHTML = "Perfect"
 	} else {
-		ratio.innerHTML = Math.round((user['kills']+user['assists'])/user['deaths'],2)+":1 KDA";
+		ratio.innerHTML = ((user['kills']+user['assists'])/user['deaths']).toFixed(2)+":1 KDA";
 	}
 	
 	
@@ -277,7 +390,7 @@ function createMatchSummaryBlock(m, user){
 	var cs = document.createElement("div");
 	cs.classList.add("cs");
 	var creepScore = user['totalMinionsKilled'] + user['neutralMinionsKilled'];
-	var avgCreepScorePreMin = Math.round(creepScore/(Math.round(user['timePlayed']/60)), 1);
+	var avgCreepScorePreMin = (creepScore/(Math.round(user['timePlayed']/60))).toFixed(1);
 	
 	cs.innerHTML = "CS "+creepScore+" ("+avgCreepScorePreMin+")";
 	
@@ -515,7 +628,7 @@ function generateSummonerStatistics(matches, puuid){
 					gameTemp['gamesLoss'] += 1;
 				}
 				gameTemp['creepScoreTotal'] += p.totalMinionsKilled + p.neutralMinionsKilled;
-				gameTemp['creepScorePerMinTotal'] += Math.round((p.totalMinionsKilled + p.neutralMinionsKilled)/Math.round(p.timePlayed/60), 1);
+				gameTemp['creepScorePerMinTotal'] += parseFloat(((p.totalMinionsKilled + p.neutralMinionsKilled)/Math.round(p.timePlayed/60)).toFixed(1));
 				gameTemp['goldTotal'] += p.goldEarned;
 				gameTemp['damageDealtTotal'] += p.totalDamageDealt;
 				gameTemp['damageTakenTotal'] += p.totalDamageTaken;
@@ -542,19 +655,19 @@ function generateSummonerStatistics(matches, puuid){
 	
 	championPool.forEach(c => {
 		var totalGames = c['gamesWon'] + c['gamesLoss'];
-		c['avgKills'] = Math.round(c['killsTotal']/totalGames, 1);
-		c['avgDeaths'] = Math.round(c['deathsTotal']/totalGames, 1);
-		c['avgAssists'] = Math.round(c['assistsTotal']/totalGames, 1);
+		c['avgKills'] = parseFloat((c['killsTotal']/totalGames).toFixed(1));
+		c['avgDeaths'] = parseFloat((c['deathsTotal']/totalGames).toFixed(1));
+		c['avgAssists'] = parseFloat((c['assistsTotal']/totalGames).toFixed(1));
 		if(c['avgDeaths'] == 0){
 			c['avgKDA'] = "Perfect"
 		} else {
-			c['avgKDA'] = Math.round((c['avgKills'] + c['avgAssists']) / c['avgDeaths'], 2);
+			c['avgKDA'] = parseFloat(((c['avgKills'] + c['avgAssists']) / c['avgDeaths']).toFixed(2));
 		}
 		
 		c['winRate'] = Math.round((c['gamesWon'] * 100) / totalGames);
 		c['gamesPlayed'] = totalGames;
-		c['avgCreepScore'] = Math.round(c['creepScoreTotal']/totalGames);
-		c['avgCreepScorePreMin'] = Math.round(c['creepScorePerMinTotal']/totalGames, 1);
+		c['avgCreepScore'] = parseFloat((c['creepScoreTotal']/totalGames).toFixed(1));
+		c['avgCreepScorePreMin'] = parseFloat((c['creepScorePerMinTotal']/totalGames).toFixed(1));
 		c['avgGold'] = Math.round(c['goldTotal']/totalGames);
 	});
 	

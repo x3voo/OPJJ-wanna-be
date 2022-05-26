@@ -1,6 +1,6 @@
 const https = require('https');
 
-var api_key = "RGAPI-8be3c08b-93fb-4252-abab-d59e7f23e97e";
+var api_key = "RGAPI-b421ee20-69b1-40dd-b009-7d4d0e5fc0a2";
 
 var gamesPerUpdate = 10;
 

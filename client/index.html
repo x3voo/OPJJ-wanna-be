@@ -877,6 +877,54 @@
 			}
 			
 			    
+				
+			
+			#username {
+				height: 38px;
+			}
+			
+			#username:focus + #favorites {
+				display: block;
+			}
+			
+			#summonerInput {
+				position: relative;
+			}
+			
+			#favorites {
+				position: absolute;
+				border: solid 4px #5383E8;
+				border-radius: 8px;
+				display: none;
+				z-index: 1;
+				background: #fff;
+				width: 200px;
+				padding: 0 0 0 10px;
+			}
+			
+			#favorites:hover {
+				display: block;
+			}
+			
+			#favorites p {
+				border-top: 1px solid;
+				border-color: #ebeef1;
+				cursor: pointer;
+				margin-bottom: 5px;
+			}
+			
+			.favorite-button {
+				width: 28px;
+				height: 28px;
+				margin-left: 10px;
+				border-radius: 4px;
+				border-width: 1px;
+				border-style: solid;
+				border-image: initial;
+				border-color: #DBE0E4;
+				background-color: #FFF;
+			}
+			
 		</style>
 	</head>
 	<body onload="run()">
@@ -886,10 +934,18 @@
 					LoL Finder
 				</div>
 				<div class="navigation-banner">
-					<input type="text" id="username"></input>
+					<div id="summonerInput">
+						<input type="text"  autoComplete="off" id="username"></input>
+					</div>
+					<div id="favorites">
+					</div>
 					<button id="get">Show user</button>
 				</div>
 			</header>
+			
+			
+			
+			
 			<div id="content-header">
 				<div class="content-header-top">
 	<br/>
@@ -904,6 +960,9 @@
 							<div class="info">
 								<div class="name">
 									<span id="name" class="summoner-name">Summoner</span>
+									<button class="favorite-button" id="addToFavButton">
+										<img src="assets/images/icon-bookmark.svg" alt="off"/>
+									</button>
 								</div>
 								<div class="buttons">
 									<button id="update" class="button-update">Update</button>
